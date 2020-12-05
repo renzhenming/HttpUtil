@@ -15,14 +15,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                .writeTimeout(10000L,TimeUnit.MILLISECONDS)
-                .build();
-        OkHttpEngine okHttpEngine = OkHttpEngine.initClient(okHttpClient);
-
-        HttpUtils.initHttp(okHttpEngine);
+        HttpUtils.initHttp(new OkHttpEngine());
         CacheUtils.getInstance().init(new SpCache());
     }
 }

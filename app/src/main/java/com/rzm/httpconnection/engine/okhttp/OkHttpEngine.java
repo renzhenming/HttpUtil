@@ -40,22 +40,15 @@ public class OkHttpEngine implements IHttp {
 
     private OkHttpClient mOkHttpClient;
 
-    private OkHttpEngine() {
+    public OkHttpEngine() {
     }
 
-    private OkHttpEngine(OkHttpClient okHttpClient) {
-        this.mOkHttpClient = okHttpClient;
-    }
-
-    public static OkHttpEngine initClient(OkHttpClient okHttpClient) {
-        if (mOkHttpEngine == null){
-            synchronized (OkHttpEngine.class){
-                if (mOkHttpEngine == null){
-                    mOkHttpEngine = new OkHttpEngine(okHttpClient);
-                }
-            }
-        }
-        return mOkHttpEngine;
+    public OkHttpEngine(OkHttpClient okHttpClient) {
+        this.mOkHttpClient  = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .writeTimeout(10000L,TimeUnit.MILLISECONDS)
+                .build();
     }
 
     /***********************************************************************************************
